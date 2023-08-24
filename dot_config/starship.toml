@@ -1,0 +1,160 @@
+format = """\
+  $username\
+  $hostname\
+  $directory\
+  $git_branch\
+  $git_commit\
+  $git_state\
+  $git_status\
+  $cmd_duration\
+  $custom\
+  $jobs\
+  $battery\
+  $time\
+  $line_break\
+  $character\
+  """
+
+# Inserts a blank line between shell prompts
+add_newline = true
+
+command_timeout = 750
+
+[battery]
+full_symbol = "🔋 "
+charging_symbol = "🔌 "
+discharging_symbol = "⚡ "
+
+[[battery.display]]
+threshold = 10
+style = "bold red"
+
+[[battery.display]]
+threshold = 65
+style = "bold yellow"
+
+[[battery.display]]
+threshold = 100
+style = "bold green"
+
+[character]
+success_symbol = "[➜](bold green) "
+error_symbol = "[✗](bold red) "
+vicmd_symbol = "[V](bold green) "
+# use_symbol_for_status = true
+
+[cmd_duration]
+# $duration – The command duration (e.g. "15s")
+# $style    – The default style of the module (e.g. "bold yellow")
+format = "took [$duration]($style) "
+
+[directory]
+truncation_length = 6
+truncate_to_repo = true
+truncation_symbol = "…/"
+style = "bold cyan dimmed"
+disabled = false
+format = "in [$path]($style) "
+
+# [env_var]
+# variable = "SHELL"
+# default = "Zsh"
+# prefix = "<"
+# suffix = ">"
+
+[git_branch]
+# symbol = "🌱 "
+truncation_length = 8
+truncation_symbol = "..."
+style = "bold purple"
+disabled = false
+
+[git_state]
+format = '[\($state( $progress_current of $progress_total)\)]($style) '
+cherry_pick = "🍒 CHERRY PICKING"
+rebase = "🌊 REBASING"
+merge = "📏 MERGING"
+revert = "REVERTING"
+bisect = "BISECTING"
+am = "AM"
+am_or_rebase = "AM/REBASE"
+# progress_divider = " of "
+style = "bold yellow"
+disabled = false
+
+[git_status]
+conflicted = "⚔️ "
+ahead = "🏎️ × ${count}"
+behind = "🐢 × ${count}"
+diverged = "🔱 🏎️ × ${ahead_count} 🐢 × ${behind_count}"
+untracked = "🛤️ × ${count}‍"
+stashed = "📦 "
+modified = "📝 "
+staged = "➕ "
+renamed = "👅 "
+deleted = "💣 "
+style = "bold fg:27"
+format = "$all_status$ahead_behind"
+
+[hostname]
+ssh_only = false
+trim_at = "."
+style = "bold fg:117"
+format = "@ [$hostname]($style) "
+# prefix = "🤖"
+# suffix = "⟫"
+disabled = false
+
+# [jobs]
+# symbol = "+ "
+# threshold = 1
+
+[line_break]
+disabled = false
+
+# [memory_usage]
+# disabled = false
+# show_percentage = true
+# show_swap = false
+# threshold = -1
+# symbol = " "
+# separator = "/"
+# style = "bold dimmed white"
+
+[nodejs]
+symbol = "⬢ "
+style = "bold green"
+disabled = false
+
+# [package]
+# symbol = "📦 "
+# style = "bold red"
+# disabled = false
+
+[python]
+symbol = "🐍 "
+pyenv_version_name = false
+pyenv_prefix = "pyenv"
+style = "bold yellow"
+disabled = false
+
+# [time]
+# format = "🕙%T"
+# style_root = "bold red"
+# style_user = "bold yellow"
+# show_always = true
+# disabled = false
+
+[time]
+time_format = "%R"
+format = "at [$time]($style) "
+style = "bold white"
+time_range = "17:00:00-03:00:00"
+disabled = false
+
+[username]
+style_root = "bold red"
+style_user = "bold yellow"
+format = "[$user]($style) "
+show_always = true
+disabled = false
