@@ -170,7 +170,7 @@ alias gm='git commit -m "${_lc#gm }" #'
 
 # Download base .gitignore
 gig() {
-   curl https://build.jonxo.dev/env/git/gitignore > .gitignore
+   curl https://raw.githubusercontent.com/github/gitignore/refs/heads/main/Python.gitignore > .gitignore
 }
 
 # Download base PR Template
