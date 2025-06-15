@@ -21,7 +21,7 @@ PYENV_ROOT := $(HOME)/.pyenv
 # Default target: Runs all main setup steps if no specific target is provided.
 # This ensures a comprehensive setup process from start to finish.
 .PHONY: all
-all: install-sys-deps install-zsh-omz configure-zsh install-nvm install-pyenv install-dev-utils
+all: install-sys-deps install-zsh-omz configure-zsh install-nvm install-pyenv install-dev-utils configure-git
 
 # Help target: Provides information about available Makefile targets and their usage.
 # This is useful for quickly understanding what the Makefile can do.
@@ -38,6 +38,7 @@ help:
 	@echo "  $(BOLD)install-sys-deps$(RESET)  : Installs essential system-level build tools and utilities."
 	@echo "  $(BOLD)install-zsh-omz$(RESET)  : Installs Zsh and the Oh My Zsh framework."
 	@echo "  $(BOLD)configure-zsh$(RESET)        : Configures the .zshrc file with NVM and pyenv paths, and common aliases."
+	@echo "  $(BOLD)configure-git$(RESET)        : Configures Git with default branch and user settings from .env file."
 	@echo "  $(BOLD)install-nvm$(RESET)          : Installs Node Version Manager (NVM) for Node.js management."
 	@echo "  $(BOLD)install-pyenv$(RESET)        : Installs pyenv for Python version management."
 	@echo "  $(BOLD)install-dev-utils$(RESET): Installs additional useful development utilities like fzf, exa, and bat."
@@ -212,6 +213,25 @@ install-dev-utils:
 		echo "$(YELLOW)bat is already installed. Skipping.$(RESET)"; \
 	fi
 	@echo "$(GREEN)>>> Additional utilities installed.$(RESET)"
+
+# -----------------------------------------------------------------------------
+# Git Configuration
+# -----------------------------------------------------------------------------
+
+.PHONY: configure-git
+configure-git:
+	@echo "$(BOLD)$(YELLOW)>>> Configuring Git...$(RESET)"
+	@if [ -f .env ]; then \
+		source .env && \
+		git config --global init.defaultBranch main && \
+		git config --global user.name "$$GIT_USER_NAME" && \
+		git config --global user.email "$$GIT_EMAIL_ADDRESS" && \
+		echo "$(GREEN)Git configured with user.name='$$GIT_USER_NAME' and user.email='$$GIT_EMAIL_ADDRESS'$(RESET)"; \
+	else \
+		echo "$(RED)Error: .env file not found. Please create one from .env.example$(RESET)"; \
+		exit 1; \
+	fi
+	@echo "$(GREEN)>>> Git configuration complete.$(RESET)"
 
 # -----------------------------------------------------------------------------
 # Cleanup Target
