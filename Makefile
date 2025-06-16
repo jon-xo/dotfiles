@@ -72,7 +72,7 @@ install-zsh-omz:
 	chsh -s $(shell which zsh) $(USER)
 	@echo "$(BOLD)$(YELLOW)>>> Installing Oh My Zsh...$(RESET)"
 	# Check if Oh My Zsh is already installed before attempting installation.
-	if [ ! -d "$(HOME)/.oh-my-zsh" ]; then \
+	@if [ ! -d "$(HOME)/.oh-my-zsh" ]; then \
 		sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended; \
 		echo "$(GREEN)Oh My Zsh installed successfully.$(RESET)"; \
 	else \
@@ -105,7 +105,7 @@ install-zsh-omz:
 	@if [ -f "$(HOME)/.oh-my-zsh/custom/plugins/git-open" ]; then \
 		echo "$(YELLOW)git-open plugin is already installed. Skipping...$(RESET)"; \
 	else \
-		"git clone https://github.com/zsh-users/git-open.git" "$(HOME)/.oh-my-zsh/custom/plugins/git-open"; \
+		"git clone https://github.com/paulirish/git-open.git" "$(HOME)/.oh-my-zsh/custom/plugins/git-open"; \
 		echo "$(GREEN)Oh my zsh plugin: git-open successfully.$(RESET)"; \
 	fi
 	@if [ -f "$(HOME)/.oh-my-zsh/custom/plugins/zsh-autosuggestions" ]; then \
@@ -221,7 +221,7 @@ install-dev-utils:
 .PHONY: configure-git
 configure-git:
 	@echo "$(BOLD)$(YELLOW)>>> Configuring Git...$(RESET)"
-	@if [ -f .env ]; then \
+	@if [ -f ./.env ]; then \
 		source .env && \
 		git config --global init.defaultBranch main && \
 		git config --global user.name "$$GIT_USER_NAME" && \
